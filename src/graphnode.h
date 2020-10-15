@@ -4,6 +4,7 @@
 #include <vector>
 #include <string>
 #include "chatbot.h"
+#include <memory>
 
 
 // forward declarations
@@ -16,7 +17,7 @@ private:
     ////
 
     // data handles (owned)
-    std::vector<GraphEdge *> _childEdges;  // edges to subsequent nodes
+    std::vector<std::unique_ptr<GraphEdge>> _childEdges;  // edges to subsequent nodes
 
     // data handles (not owned)
     std::vector<GraphEdge *> _parentEdges; // edges to preceding nodes 
@@ -35,11 +36,11 @@ public:
     ~GraphNode();
 
     // getter / setter
-    int GetID() { return _id; }
-    int GetNumberOfChildEdges() { return _childEdges.size(); }
+    int GetID() const { return _id; }
+    int GetNumberOfChildEdges() const { return _childEdges.size(); }
     GraphEdge *GetChildEdgeAtIndex(int index);
-    std::vector<std::string> GetAnswers() { return _answers; }
-    int GetNumberOfParents() { return _parentEdges.size(); }
+    std::vector<std::string> GetAnswers() const { return _answers; }
+    int GetNumberOfParents() const { return _parentEdges.size(); }
 
     // proprietary functions
     void AddToken(std::string token); // add answers to list
