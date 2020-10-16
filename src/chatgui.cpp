@@ -105,7 +105,7 @@ EVT_PAINT(ChatBotPanelDialog::paintEvent) // catch paint events
 END_EVENT_TABLE()
 
 ChatBotPanelDialog::ChatBotPanelDialog(wxWindow *parent, wxWindowID id)
-    : wxScrolledWindow(parent, id), _chatLogic(new ChatLogic())
+    : wxScrolledWindow(parent, id), _chatLogic(std::make_unique<ChatLogic>())
 {
     // sizer will take care of determining the needed scroll size
     _dialogSizer = new wxBoxSizer(wxVERTICAL);
